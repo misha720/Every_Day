@@ -3,9 +3,11 @@
 View:
 
 <View>:
+	# Левая часть
 	BoxLayout:
 		orientation: 'vertical'
-		size_hint:(0.25, 1)
+		size_hint:(None,None)
+		size:(200,640)
 		padding:10
 		canvas:
 			Color:
@@ -73,10 +75,12 @@ View:
 
 		Widget:
 
+	# Правая сторона
 	BoxLayout:
-		padding:20
+		padding:30,30,30,30
 		orientation:'vertical'
 
+		# Заголовок
 		AnchorLayout:
 			anchor_x:'left'
 			anchor_y:'top'
@@ -89,7 +93,230 @@ View:
 				halign:'left'
 				bold:True
 
-		BoxLayout:
+		# Все блоки информации
+		StackLayout:
 			size_hint:(1,1)
-			Button:
-				background_color:(30/255,30/255,30/255)
+			padding:0,10,0,0
+			spacing:10
+
+			# Задачи
+			BoxLayout:
+				orientation:'vertical'
+				size_hint:(None,None)
+				size:(270,200)
+
+				# Заголовок
+				BoxLayout:
+					size_hint:(1, 0.2)
+					
+					canvas:
+						Color:
+							rgba:(63/255,63/255,63/255,1)
+						RoundedRectangle: 
+							pos: self.pos 
+							size: self.size
+							radius:[10,10,0,0]
+					
+					Label:
+						text:'Задачи'
+						font_family:'Ubuntu'
+						font_size:'15sp'
+						bold:True
+				
+				# Список
+				BoxLayout:
+					orientation:'vertical'
+					size_hint:(1,1)
+					padding:10,0,10,0
+
+					canvas:
+						Color:
+							rgba:(30/255,30/255,30/255,1)
+						RoundedRectangle: 
+							pos: self.pos 
+							size: self.size
+							radius:[0,0,10,10]
+
+					Label:
+						text:"Item 1"
+						font_family:'Ubuntu'
+						font_size:'15sp'
+						
+					Label:
+						text:"Item 2"
+						font_family:'Ubuntu'
+						font_size:'15sp'
+							
+					Label:
+						text:"Item 3"
+						font_family:'Ubuntu'
+						font_size:'15sp'
+
+					Button:
+						text:"..."
+						font_size:'15sp'
+						bold:True
+						font_family:'Ubuntu'
+						color:(108/255,73/255,211/255)
+						background_color:(30/255,30/255,30/255)
+						background_normal:''
+			
+			# Вода
+			BoxLayout:
+				orientation:'vertical'
+				size_hint:(None,None)
+				size:(145,200)
+				padding:5
+
+				canvas:
+					Color:
+						rgba:(79/255,56/255,146/255,1)
+					RoundedRectangle: 
+						pos: self.pos 
+						size: self.size
+						radius:[10]
+
+				# Заголовок
+				Label:
+					text: 'Вода'
+					size_hint:(1,0.15)
+					font_size:15
+					bold:True
+
+				# Круг
+				BoxLayout:
+					size_hint:(1,1)
+					padding:27,20,27,28
+
+					BoxLayout:
+						padding:10
+						canvas:
+							Color:
+								rgba:(108/255,73/255,211/255,1)
+							RoundedRectangle: 
+								pos: self.pos 
+								size: (81,81)
+								radius:[1000]
+
+						Label:
+							text:"72%"
+							size_hint:(None,None)
+							size:(61,61)
+							font_size:24
+							bold:True
+
+				# Таблица
+				GridLayout:
+					cols:2
+					size_hint:(1, 0.40)
+					padding:5,0,5,0
+					borders: 1,'solid',(0,0,0,1)
+
+					Label:
+						text: 'За сегодня'
+						size_hint:(None, None)
+						size:(64,20)
+						font_size:12
+						halign:'left'
+						valign:'top'
+					Label:
+						text: '1440ml'
+						size_hint:(None, None)
+						size:(64,20)
+						font_size:12
+						bold:True
+						halign:'right'
+						valign:'top'
+					Label:
+						text: 'Цель'
+						size_hint:(None, None)
+						size:(64,20)
+						font_size:12
+						halign:'left'
+						valign:'top'
+					Label:
+						text: '2000ml'
+						size_hint:(None, None)
+						size:(64,20)
+						font_size:12
+						bold:True
+						halign:'right'
+						valign:'top'
+
+			# Каллории
+			BoxLayout:
+				orientation:'vertical'
+				size_hint:(None,None)
+				size:(145,200)
+				padding:5
+
+				canvas:
+					Color:
+						rgba:(135/255,194/255,133/255,1)
+					RoundedRectangle: 
+						pos: self.pos 
+						size: self.size
+						radius:[10]
+
+				# Заголовок
+				Label:
+					text: 'Каллории'
+					size_hint:(1,0.15)
+					font_size:15
+					bold:True
+
+				# Круг
+				BoxLayout:
+					size_hint:(1,1)
+					padding:27,20,27,28
+
+					BoxLayout:
+						padding:10
+						canvas:
+							Color:
+								rgba:(153/255,219/255,150/255,1)
+							RoundedRectangle: 
+								pos: self.pos 
+								size: (81,81)
+								radius:[1000]
+
+						Label:
+							text:"56%"
+							size_hint:(None,None)
+							size:(61,61)
+							font_size:24
+							bold:True
+
+				# Таблица
+				GridLayout:
+					cols:2
+					size_hint:(1, 0.40)
+					padding:5,0,5,0
+					borders: 1,'solid',(0,0,0,1)
+
+					Label:
+						text: 'За сегодня'
+						size_hint:(None, None)
+						size:(64,20)
+						font_size:12
+						
+					Label:
+						text: '672kl'
+						size_hint:(None, None)
+						size:(64,20)
+						font_size:12
+						bold:True
+						
+					Label:
+						text: 'Цель'
+						size_hint:(None, None)
+						size:(64,20)
+						font_size:12
+						
+					Label:
+						text: '1200kl'
+						size_hint:(None, None)
+						size:(64,20)
+						font_size:12
+						bold:True
+						

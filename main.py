@@ -18,6 +18,8 @@ from kivy.uix.textinput import TextInput
 from kivy.core.window import Window
 from kivy.uix.widget import Widget
 from kivy.uix.anchorlayout import AnchorLayout
+from kivy.uix.stacklayout import StackLayout
+from kivy.uix.gridlayout import GridLayout
 
 Window.title = "Every Day"
 Window.clearcolor = (0/255, 0/255, 0/255)
