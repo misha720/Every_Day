@@ -1,0 +1,95 @@
+#:kivy 2.1.0
+
+View:
+
+<View>:
+	BoxLayout:
+		orientation: 'vertical'
+		size_hint:(0.25, 1)
+		padding:10
+		canvas:
+			Color:
+				rgba:(30/255,30/255,30/255,1)
+			Rectangle: 
+				pos: self.pos 
+				size: self.size
+			
+		Button:
+			text:"Сегодня"
+			font_size:'15sp'
+			font_family:'Ubuntu'
+			size_hint:(1, 0.17)
+			background_color:(63/255,63/255,63/255)
+			background_normal:''
+		Button:
+			text:"Календарь"
+			font_size:'15sp'
+			font_family:'Ubuntu'
+			size_hint:(1, 0.17)
+			background_color:(30/255,30/255,30/255)
+			background_normal:''
+		Button:
+			text:"Активность"
+			font_size:'15sp'
+			font_family:'Ubuntu'
+			size_hint:(1, 0.17)
+			background_color:(30/255,30/255,30/255)
+			background_normal:''
+		Button:
+			text:"Питание"
+			font_size:'15sp'
+			font_family:'Ubuntu'
+			size_hint:(1, 0.17)
+			background_color:(30/255,30/255,30/255)
+			background_normal:''
+		Button:
+			text:"Кошелёк"
+			font_size:'15sp'
+			font_family:'Ubuntu'
+			size_hint:(1, 0.17)
+			background_color:(30/255,30/255,30/255)
+			background_normal:''
+		Button:
+			text:"Настроение"
+			font_size:'15sp'
+			font_family:'Ubuntu'
+			size_hint:(1, 0.17)
+			background_color:(30/255,30/255,30/255)
+			background_normal:''
+		Button:
+			text:"Заметки"
+			font_size:'15sp'
+			font_family:'Ubuntu'
+			size_hint:(1, 0.17)
+			background_color:(30/255,30/255,30/255)
+			background_normal:''
+		Button:
+			text:"Настройки"
+			font_size:'15sp'
+			font_family:'Ubuntu'
+			size_hint:(1, 0.17)
+			background_color:(30/255,30/255,30/255)
+			background_normal:''
+
+		Widget:
+
+	BoxLayout:
+		padding:20
+		orientation:'vertical'
+
+		AnchorLayout:
+			anchor_x:'left'
+			anchor_y:'top'
+			size_hint:(0.20, 0.05)
+
+			Label:
+				text:"Сегодня"
+				font_family:'Ubuntu'
+				font_size:'25sp'
+				halign:'left'
+				bold:True
+
+		BoxLayout:
+			size_hint:(1,1)
+			Button:
+				background_color:(30/255,30/255,30/255)
