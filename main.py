@@ -29,7 +29,10 @@ Window.clearcolor = (0/255, 0/255, 0/255)
 class PlansScreen(Screen):
 	def __init__(self, **kwargs):
 		super(PlansScreen,self).__init__(**kwargs)
-		self.rv.data = [{'text': str(x)} for x in range(100)]
+
+		self.rv.data = [{'text': "Тихо покакать, что бы миша не услышал"},
+		{'text': "Купить мише жижу"},
+		{'text': 'Предъявить ему за то, что он мне давно не писал "я тебя лублу"'}]
 
 class TodayScreen(Screen):
 	pass

@@ -320,6 +320,10 @@
 							font_size:12
 							bold:True	
 
+<MyLabel@Label>:
+	size_hint:1,1
+	text_size:385, None
+	max_lines:0
 <PlansScreen>:
 	rv: rv
 
@@ -397,6 +401,7 @@
 
 			Widget:
 
+		# Правая часть
 		BoxLayout:
 			padding:30
 			orientation:'vertical'
@@ -448,10 +453,15 @@
 			
 			# Border	
 			BoxLayout:
+				spacing:10
+				size_hint:None, None
+				size:580,485
 
 				# To-Do
 				BoxLayout:
+					orientation:"vertical"
 					padding:10
+					spacing: 10
 					size_hint:(None,None)
 					size:(415,485)
 
@@ -463,7 +473,7 @@
 							size: self.size
 							radius:[10]
 
-					# BTN
+					#BTN
 					BoxLayout:
 						size_hint:(None,None)
 						size:(395,35)
@@ -474,16 +484,78 @@
 							background_normal:''
 						
 					# LIST
-					BoxLayout:
+					AnchorLayout:
+						anchor_x:"center"
+						anchor_y:"top"
 						size_hint:(1,1)
 
 						RecycleView:
 							id: rv
-							viewclass: 'Label'
+							viewclass: 'MyLabel'
 
 							RecycleBoxLayout:
-								default_size: None, dp(56)
-								default_size_hint: 1, None
-								size_hint_y: 1
-								height: self.minimum_height
+
 								orientation: 'vertical'
+								default_height:35
+								default_size_hint: 1, None
+								size_hint_y: None
+								height: self.minimum_height
+
+				# Status
+				BoxLayout:
+					orientation:'vertical'
+
+					BoxLayout:
+						anchor_x:"center"
+						anchor_y:"top"
+						orientation:'vertical'
+						size_hint_x:1
+						size_y:195
+
+						canvas:
+							Color:
+								rgba:(135/255,194/255,133/255, 1)
+							RoundedRectangle: 
+								pos: self.pos 
+								size: self.size
+								radius:[10]
+
+						# Заголовок
+						Label:
+							text: 'Статус'
+							size_hint:(1,0.15)
+							font_size:15
+							bold:True
+
+						# Круг
+						BoxLayout:
+							size_hint:(1,1)
+							padding:37,20,37,28
+
+							BoxLayout:
+								padding:10
+								canvas:
+									Color:
+										rgba:(153/255,219/255,150/255,1)
+									RoundedRectangle: 
+										pos: self.pos 
+										size: (81,81)
+										radius:[1000]
+
+								Label:
+									text:"50%"
+									size_hint:(None,None)
+									size:(61,61)
+									font_size:24
+									bold:True
+
+						# Текст
+						BoxLayout:
+							padding:30,21,30,10
+							
+
+							Label:
+								text: "Выполнено: 5 из 10"
+								size_hint:(None,None)
+								size:(95,30)
+					Widget:
