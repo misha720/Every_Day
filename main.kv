@@ -326,6 +326,11 @@
 	max_lines:0
 <PlansScreen>:
 	rv: rv
+	add_task:add_task
+	to_do_box:to_do_box
+	input_add_task:input_add_task
+	add_input_title_task:add_input_title_task
+	add_input_keys_task:add_input_keys_task
 
 	BoxLayout:
 		# Левая часть
@@ -414,6 +419,7 @@
 
 				Label:
 					text:"Планы"
+					color:(1,1,1,1)
 					font_family:'Ubuntu'
 					font_size:'25sp'
 					halign:'left'
@@ -459,6 +465,7 @@
 
 				# To-Do
 				BoxLayout:
+					id:to_do_box
 					orientation:"vertical"
 					padding:10
 					spacing: 10
@@ -479,9 +486,63 @@
 						size:(395,35)
 						
 						Button:
+							id:add_task
 							text:"Добавить"
+							font_size: 15
+							size_hint:(None,None)
+							size:(395,35)
 							background_color:(135/255,194/255,133/255)
 							background_normal:''
+							on_press: root.add_new_task()
+
+
+					# Add new Task
+					BoxLayout:
+						id:input_add_task
+						orientation:"vertical"
+						padding:10
+						spacing:5
+						size_hint:(None,None)
+						size:(395,175)
+
+						canvas:
+							Color:
+								rgba:(79/255, 56/255, 146/255, 1)
+							RoundedRectangle: 
+								pos: self.pos 
+								size: self.size
+								radius:[10]
+
+						# Title
+						TextInput:
+							text:""
+							id:add_input_title_task
+							size_hint:(None,None)
+							size:(375,75)
+							hint_text:"Введите задачу"
+							cursor_color:(183/255, 162/255, 245/255)
+							hint_text_color: (183/255, 162/255, 245/255)
+							foreground_color:(1,1,1,1)
+							background_color:(108/255, 73/255, 211/255)
+							background_normal:''
+
+						# Keys
+						TextInput:
+							text:""
+							id:add_input_keys_task
+							hint_text:"Введите теги"
+							cursor_color:(183/255, 162/255, 245/255)
+							hint_text_color: (183/255, 162/255, 245/255)
+							foreground_color:(1,1,1,1)
+							background_color:(108/255, 73/255, 211/255)
+							background_normal:''
+
+						# Add
+						Button:
+							text:"Добавить"
+							background_color:(108/255, 73/255, 211/255)
+							background_normal:''
+							on_press: root.add_input_task()	
 						
 					# LIST
 					AnchorLayout:
@@ -506,8 +567,7 @@
 					orientation:'vertical'
 
 					BoxLayout:
-						anchor_x:"center"
-						anchor_y:"top"
+						padding:30,10,30,10
 						orientation:'vertical'
 						size_hint_x:1
 						size_y:195
@@ -524,16 +584,16 @@
 						Label:
 							text: 'Статус'
 							size_hint:(1,0.15)
-							font_size:15
+							font_size:20
 							bold:True
 
 						# Круг
 						BoxLayout:
 							size_hint:(1,1)
-							padding:37,20,37,28
+							padding:7,20,7,0
 
 							BoxLayout:
-								padding:10
+								padding:5,10,10,10
 								canvas:
 									Color:
 										rgba:(153/255,219/255,150/255,1)
@@ -545,17 +605,17 @@
 								Label:
 									text:"50%"
 									size_hint:(None,None)
-									size:(61,61)
-									font_size:24
+									text_size:(81,81)
+									font_size:32
 									bold:True
 
 						# Текст
 						BoxLayout:
-							padding:30,21,30,10
+							padding:0,21,0,0
 							
-
 							Label:
 								text: "Выполнено: 5 из 10"
-								size_hint:(None,None)
-								size:(95,30)
+								size_hint:(1,1)
+								halign:"center"
+								text_size:(95,None)
 					Widget:
