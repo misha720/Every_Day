@@ -324,13 +324,16 @@
 							bold:True	
 
 <MyButtonInListView@Button>:
-	id:item_listview
+	background_color:(63/255, 63/255, 63/255)
+	background_normal:''
+	
+	on_touch_down: self.callbeck(root.text)
+	
+	id:text_item_listview
+	text: root.text
 	size_hint:1,1
 	text_size:385, None
 	max_lines:0
-	background_color:(63/255, 63/255, 63/255)
-	background_normal:''
-	on_press: root.OnClickItemListView()
 
 <PlansScreen>:
 	BoxLayout:
@@ -531,6 +534,8 @@
 						TextInput:
 							text:""
 							id:add_input_keys_task
+							size_hint:(None,None)
+							size:(375,35)
 							hint_text:"Введите теги"
 							cursor_color:(183/255, 162/255, 245/255)
 							hint_text_color: (183/255, 162/255, 245/255)
@@ -540,6 +545,9 @@
 
 						# Add
 						Button:
+							id:add_input_button_task
+							size_hint:(None,None)
+							size:(375,35)
 							text:"Добавить"
 							background_color:(108/255, 73/255, 211/255)
 							background_normal:''
@@ -556,7 +564,7 @@
 							viewclass: 'MyButtonInListView'
 
 							RecycleBoxLayout:
-
+								id:rv_box
 								orientation: 'vertical'
 								default_height:35
 								default_size_hint: 1, None

@@ -39,6 +39,8 @@ from kivy.uix.stacklayout import StackLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.screenmanager import ScreenManager, Screen, NoTransition
 from kivy.uix.recycleview import RecycleView
+from kivy.uix.recycleview.views import RecycleDataViewBehavior
+from kivy.properties import BooleanProperty, StringProperty
 
 Window.title = "Every Day"
 Window.clearcolor = (0/255, 0/255, 0/255)
@@ -56,7 +58,7 @@ class Base():
 		with open('base.json', 'w') as file_base:
 			json.dump(self.connect, file_base)
 
-	def add_new_today_task(self, text, key):
+	def add_new_today_task(self, text, key, status=True):
 		self.connect['task']['today'].append({
 			'text':str(text),
 			"status":"not_finished",
@@ -71,31 +73,52 @@ class PlansScreen(Screen):
 
 		self.ctrl_add_tast = 0
 		self.ids.input_add_task.opacity = 0
+		self.ids.add_input_title_task.opacity = 0
+		self.ids.add_input_keys_task.opacity = 0
+		self.ids.add_input_button_task.opacity = 0
 		self.ids.input_add_task.size = (0,0)
+		self.ids.add_input_title_task.size = (0,0)
+		self.ids.add_input_keys_task.size = (0,0)
+		self.ids.add_input_button_task.size = (0,0)
 
 		self.task_list = []
-		print(len(self.base.connect['task']['today']))
 		if len(self.base.connect['task']['today']) != 0:
 			for item_task in range( len(self.base.connect['task']['today']) ):
-				self.task_list.append({
-					'text':str(self.base.connect['task']['today'][item_task]['text'])
-					})
+				self.task_list.append(
+					self.base.connect['task']['today'][item_task]
+					)
 		self.ids.rv.data = self.task_list
-
+		
 	def add_new_task(self):
 		if self.ctrl_add_tast == 0:
 			self.ids.add_task.text = "Отмена"
 			self.ids.add_task.background_color = (219/255, 74/255, 74/255)
+			
 			self.ids.input_add_task.opacity = 1
+			self.ids.add_input_title_task.opacity = 1
+			self.ids.add_input_keys_task.opacity = 1
+			self.ids.add_input_button_task.opacity = 1
+			
 			self.ids.input_add_task.size = (395,175)
+			self.ids.add_input_title_task.size = (375,75)
+			self.ids.add_input_keys_task.size = (375,35)
+			self.ids.add_input_button_task.size = (375,35)
 
 			self.ctrl_add_tast = 1
 
 		elif self.ctrl_add_tast == 1:
 			self.ids.add_task.text = "Добавить"
 			self.ids.add_task.background_color = (135/255, 194/255, 133/255)
+			
 			self.ids.input_add_task.opacity = 0
+			self.ids.add_input_title_task.opacity = 0
+			self.ids.add_input_keys_task.opacity = 0
+			self.ids.add_input_button_task.opacity = 0
+			
 			self.ids.input_add_task.size = (0,0)
+			self.ids.add_input_title_task.size = (0,0)
+			self.ids.add_input_keys_task.size = (0,0)
+			self.ids.add_input_button_task.size = (0,0)
 
 			self.ctrl_add_tast = 0
 
@@ -114,8 +137,18 @@ class PlansScreen(Screen):
 		self.ids.input_add_task.opacity = 0
 		self.ids.input_add_task.size = (0,0)
 
-	def OnClickItemListView(self):
-		print(self.ids.item_listview.text)
+
+class MyButtonInListView(Button):
+
+	def callbeck(self,instance):
+		ps = PlansScreen()
+		
+		ps.task_list = []
+		for item_task in range( len(ps.base.connect['task']['today']) ):
+			if instance == ps.base.connect['task']['today'][item_task]['text']:
+				ps.base.connect['task']['today'][item_task]['status'] = True
+				ps.base.save()
+
 
 class TodayScreen(Screen):
 	def __init__(self, **kwargs):
@@ -127,6 +160,7 @@ class TodayScreen(Screen):
 				self.ids.list_item_2.text = self.base.connect['task']['today'][1]['text']
 				if len(self.base.connect['task']['today']) != 2:
 					self.ids.list_item_3.text = self.base.connect['task']['today'][2]['text']
+
 
 class EveryDayApp(App):
 	def __init__(self, **kwargs):
@@ -140,6 +174,7 @@ class EveryDayApp(App):
 		self.sm.add_widget(PlansScreen(name="plans"))
 
 		return self.sm
+
 
 if __name__ == '__main__':
 	EveryDayApp().run()
