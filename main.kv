@@ -138,17 +138,20 @@
 								radius:[0,0,10,10]
 
 						Label:
-							text:"Item 1"
+							id:list_item_1
+							text:""
 							font_family:'Ubuntu'
 							font_size:'15sp'
 							
 						Label:
-							text:"Item 2"
+							id:list_item_2
+							text:""
 							font_family:'Ubuntu'
 							font_size:'15sp'
 								
 						Label:
-							text:"Item 3"
+							id:list_item_3
+							text:""
 							font_family:'Ubuntu'
 							font_size:'15sp'
 
@@ -320,18 +323,16 @@
 							font_size:12
 							bold:True	
 
-<MyLabel@Label>:
+<MyButtonInListView@Button>:
+	id:item_listview
 	size_hint:1,1
 	text_size:385, None
 	max_lines:0
-<PlansScreen>:
-	rv: rv
-	add_task:add_task
-	to_do_box:to_do_box
-	input_add_task:input_add_task
-	add_input_title_task:add_input_title_task
-	add_input_keys_task:add_input_keys_task
+	background_color:(63/255, 63/255, 63/255)
+	background_normal:''
+	on_press: root.OnClickItemListView()
 
+<PlansScreen>:
 	BoxLayout:
 		# Левая часть
 		BoxLayout:
@@ -552,7 +553,7 @@
 
 						RecycleView:
 							id: rv
-							viewclass: 'MyLabel'
+							viewclass: 'MyButtonInListView'
 
 							RecycleBoxLayout:
 

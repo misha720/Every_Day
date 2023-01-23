@@ -17,6 +17,8 @@
 		(108/255, 73/255, 211/255, 1) - Duble Purple
 		(183/255, 162/255, 245/255, 1) - TextInput Purple
 '''
+# 	IMPORT
+import json
 
 #	KIVY
 from kivy.config import Config
@@ -41,49 +43,90 @@ from kivy.uix.recycleview import RecycleView
 Window.title = "Every Day"
 Window.clearcolor = (0/255, 0/255, 0/255)
 
+# Управление базой данных
+class Base():
+	def __init__(self,**kwargs):
+		super(Base,self).__init__(**kwargs)
+
+		with open('base.json', 'r') as file_base:
+			self.connect = json.load(file_base)
+
+	def save(self):
+		# Сохранение базы данных
+		with open('base.json', 'w') as file_base:
+			json.dump(self.connect, file_base)
+
+	def add_new_today_task(self, text, key):
+		self.connect['task']['today'].append({
+			'text':str(text),
+			"status":"not_finished",
+			"key":str(key)})
+		self.save()
+
+
 class PlansScreen(Screen):
-	def __init__(self, **kwargs):
+	def __init__(self,**kwargs):
 		super(PlansScreen,self).__init__(**kwargs)
+		self.base = Base()
 
 		self.ctrl_add_tast = 0
-		self.input_add_task.opacity = 0
-		self.input_add_task.size = (0,0)
+		self.ids.input_add_task.opacity = 0
+		self.ids.input_add_task.size = (0,0)
 
-		self.rv.data = [{'text': "Купить мише жижу"}]
+		self.task_list = []
+		print(len(self.base.connect['task']['today']))
+		if len(self.base.connect['task']['today']) != 0:
+			for item_task in range( len(self.base.connect['task']['today']) ):
+				self.task_list.append({
+					'text':str(self.base.connect['task']['today'][item_task]['text'])
+					})
+		self.ids.rv.data = self.task_list
 
 	def add_new_task(self):
 		if self.ctrl_add_tast == 0:
-			self.add_task.text = "Отмена"
-			self.add_task.background_color = (219/255, 74/255, 74/255)
-			self.input_add_task.opacity = 1
-			self.input_add_task.size = (395,175)
+			self.ids.add_task.text = "Отмена"
+			self.ids.add_task.background_color = (219/255, 74/255, 74/255)
+			self.ids.input_add_task.opacity = 1
+			self.ids.input_add_task.size = (395,175)
 
 			self.ctrl_add_tast = 1
 
 		elif self.ctrl_add_tast == 1:
-			self.add_task.text = "Добавить"
-			self.add_task.background_color = (135/255, 194/255, 133/255)
-			self.input_add_task.opacity = 0
-			self.input_add_task.size = (0,0)
+			self.ids.add_task.text = "Добавить"
+			self.ids.add_task.background_color = (135/255, 194/255, 133/255)
+			self.ids.input_add_task.opacity = 0
+			self.ids.input_add_task.size = (0,0)
 
 			self.ctrl_add_tast = 0
 
 	def add_input_task(self):
-		title = self.add_input_title_task.text
-		keys = self.add_input_keys_task.text
+		title = self.ids.add_input_title_task.text
+		keys = self.ids.add_input_keys_task.text
 
-		self.rv.data.append( {'text':title} )
+		self.ids.rv.data.append( {'text':title} )
+		self.base.add_new_today_task(title, keys)
 
-		self.add_input_title_task.text = ""
-		self.add_input_keys_task.text = ""
+		self.ids.add_input_title_task.text = ""
+		self.ids.add_input_keys_task.text = ""
 
-		self.add_task.text = "Добавить"
-		self.add_task.background_color = (135/255, 194/255, 133/255)
-		self.input_add_task.opacity = 0
-		self.input_add_task.size = (0,0)
+		self.ids.add_task.text = "Добавить"
+		self.ids.add_task.background_color = (135/255, 194/255, 133/255)
+		self.ids.input_add_task.opacity = 0
+		self.ids.input_add_task.size = (0,0)
+
+	def OnClickItemListView(self):
+		print(self.ids.item_listview.text)
 
 class TodayScreen(Screen):
-	pass
+	def __init__(self, **kwargs):
+		super(TodayScreen,self).__init__(**kwargs)
+		self.base = Base()
+		if len(self.base.connect['task']['today']) != 0:
+			self.ids.list_item_1.text = self.base.connect['task']['today'][0]['text']
+			if len(self.base.connect['task']['today']) != 1:
+				self.ids.list_item_2.text = self.base.connect['task']['today'][1]['text']
+				if len(self.base.connect['task']['today']) != 2:
+					self.ids.list_item_3.text = self.base.connect['task']['today'][2]['text']
 
 class EveryDayApp(App):
 	def __init__(self, **kwargs):
