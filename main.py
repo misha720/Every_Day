@@ -140,7 +140,7 @@ class PlansScreen(Screen):
 
 class MyButtonInListView(Button):
 
-	def callbeck(self,instance):
+	def callback(self,instance):
 		ps = PlansScreen()
 		
 		ps.task_list = []
@@ -154,6 +154,15 @@ class TodayScreen(Screen):
 	def __init__(self, **kwargs):
 		super(TodayScreen,self).__init__(**kwargs)
 		self.base = Base()
+
+		self.num_kl_today = 0
+		self.num_kl_plan = 0
+		self.procent_plan_and_today = str((self.num_kl_plan // 100) * self.num_kl_today) + "%"
+
+		self.ids.procent_in_circule.text = self.procent_plan_and_today
+		self.ids.today_in_circule.text = "0kl"
+		self.ids.plan_in_circule.text = "0kl"
+
 		if len(self.base.connect['task']['today']) != 0:
 			self.ids.list_item_1.text = self.base.connect['task']['today'][0]['text']
 			if len(self.base.connect['task']['today']) != 1:

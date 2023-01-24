@@ -284,6 +284,7 @@
 									radius:[1000]
 
 							Label:
+								id:procent_in_circule
 								text:"56%"
 								size_hint:(None,None)
 								size:(61,61)
@@ -304,6 +305,7 @@
 							font_size:12
 							
 						Label:
+							id:today_in_circule
 							text: '672kl'
 							size_hint:(None, None)
 							size:(64,20)
@@ -317,6 +319,7 @@
 							font_size:12
 							
 						Label:
+							id:plan_in_circule
 							text: '1200kl'
 							size_hint:(None, None)
 							size:(64,20)
@@ -327,7 +330,7 @@
 	background_color:(63/255, 63/255, 63/255)
 	background_normal:''
 	
-	on_touch_down: self.callbeck(root.text)
+	on_touch_down: self.callback(root.text)
 	
 	id:text_item_listview
 	text: root.text
