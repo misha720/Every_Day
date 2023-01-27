@@ -104,6 +104,7 @@
 					orientation:'vertical'
 					size_hint:(None,None)
 					size:(270,200)
+					on_touch_down:root.manager.current = 'plans'
 
 					# Заголовок
 					BoxLayout:
@@ -164,87 +165,87 @@
 							background_color:(30/255,30/255,30/255)
 							background_normal:''
 				
-				# # Вода
-				# BoxLayout:
-				# 	orientation:'vertical'
-				# 	size_hint:(None,None)
-				# 	size:(145,200)
-				# 	padding:5
+				# Вода
+				BoxLayout:
+					orientation:'vertical'
+					size_hint:(None,None)
+					size:(145,200)
+					padding:5
 
-				# 	canvas:
-				# 		Color:
-				# 			rgba:(79/255,56/255,146/255,1)
-				# 		RoundedRectangle: 
-				# 			pos: self.pos 
-				# 			size: self.size
-				# 			radius:[10]
+					canvas:
+						Color:
+							rgba:(79/255,56/255,146/255,1)
+						RoundedRectangle: 
+							pos: self.pos 
+							size: self.size
+							radius:[10]
 
-				# 	# Заголовок
-				# 	Label:
-				# 		text: 'Вода'
-				# 		size_hint:(1,0.15)
-				# 		font_size:15
-				# 		bold:True
+					# Заголовок
+					Label:
+						text: 'Вода'
+						size_hint:(1,0.15)
+						font_size:15
+						bold:True
 
-				# 	# Круг
-				# 	BoxLayout:
-				# 		size_hint:(1,1)
-				# 		padding:27,20,27,28
+					# Круг
+					BoxLayout:
+						size_hint:(1,1)
+						padding:27,20,27,28
 
-				# 		BoxLayout:
-				# 			padding:10
-				# 			canvas:
-				# 				Color:
-				# 					rgba:(108/255,73/255,211/255,1)
-				# 				RoundedRectangle: 
-				# 					pos: self.pos 
-				# 					size: (81,81)
-				# 					radius:[1000]
+						BoxLayout:
+							padding:10
+							canvas:
+								Color:
+									rgba:(108/255,73/255,211/255,1)
+								RoundedRectangle: 
+									pos: self.pos 
+									size: (81,81)
+									radius:[1000]
 
-				# 			Label:
-				# 				text:"72%"
-				# 				size_hint:(None,None)
-				# 				size:(61,61)
-				# 				font_size:24
-				# 				bold:True
+							Label:
+								text:"0%"
+								size_hint:(None,None)
+								size:(61,61)
+								font_size:24
+								bold:True
 
-				# 	# Таблица
-				# 	GridLayout:
-				# 		cols:2
-				# 		size_hint:(1, 0.40)
-				# 		padding:5,0,5,0
-				# 		borders: 1,'solid',(0,0,0,1)
+					# Таблица
+					GridLayout:
+						cols:2
+						size_hint:(1, 0.40)
+						padding:5,0,5,0
+						borders: 1,'solid',(0,0,0,1)
 
-				# 		Label:
-				# 			text: 'За сегодня'
-				# 			size_hint:(None, None)
-				# 			size:(64,20)
-				# 			font_size:12
-				# 			halign:'left'
-				# 			valign:'top'
-				# 		Label:
-				# 			text: '1440ml'
-				# 			size_hint:(None, None)
-				# 			size:(64,20)
-				# 			font_size:12
-				# 			bold:True
-				# 			halign:'right'
-				# 			valign:'top'
-				# 		Label:
-				# 			text: 'Цель'
-				# 			size_hint:(None, None)
-				# 			size:(64,20)
-				# 			font_size:12
-				# 			halign:'left'
-				# 			valign:'top'
-				# 		Label:
-				# 			text: '2000ml'
-				# 			size_hint:(None, None)
-				# 			size:(64,20)
-				# 			font_size:12
-				# 			bold:True
-				# 			halign:'right'
-				# 			valign:'top'
+						Label:
+							text: 'За сегодня'
+							size_hint:(None, None)
+							size:(64,20)
+							font_size:12
+							halign:'left'
+							valign:'top'
+						Label:
+							text: '0ml'
+							size_hint:(None, None)
+							size:(64,20)
+							font_size:12
+							bold:True
+							halign:'right'
+							valign:'top'
+						Label:
+							text: 'Цель'
+							size_hint:(None, None)
+							size:(64,20)
+							font_size:12
+							halign:'left'
+							valign:'top'
+						Label:
+							text: '0ml'
+							size_hint:(None, None)
+							size:(64,20)
+							font_size:12
+							bold:True
+							halign:'right'
+							valign:'top'
 
 				# Каллории
 				BoxLayout:
